@@ -16,8 +16,15 @@ class Battle < Sinatra::Base
   get '/play' do
     @player_1 = session[:player_1]
     @player_2 = session[:player_2]
+    @victim = session[:victim]
     erb(:play)
   end
+
+  post '/attack' do
+    session[:victim] = session[:player_2]
+    redirect to('play')
+  end
+
   # this will start the server automatically if the app.rb file is run in the command line, ie `ruby app.rb`, so you don't have to start the server with eg `shotgun config.ru` :)
   run! if app_file == $0
 end
