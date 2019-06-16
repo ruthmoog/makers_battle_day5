@@ -28,4 +28,9 @@ describe "see player's hit points", type: :feature do
     click_button('attack')
     expect(page).to have_content "Chris: 50 hit points"
   end
+
+  it "shows who's turn it is" do 
+    sign_in_and_play
+    expect(page).to have_content "Ruth's turn"
+  end
 end
