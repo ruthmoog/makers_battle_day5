@@ -2,6 +2,14 @@ class Game
 
   attr_reader :active_player, :non_active_player, :last_victim_msg, :winner
 
+  def self.create(player_1, player_2)
+    @roger = Game.new(player_1, player_2)
+  end
+
+  def self.instance
+    @roger
+  end
+
   def initialize(player_1, player_2)
     @players = [player_1, player_2]
     @active_player = player_1

@@ -12,22 +12,22 @@ class Battle < Sinatra::Base
   post '/names' do
     player_1 = Player.new(params[:player_1])
     player_2 = Player.new(params[:player_2])
-    $game = Game.new(player_1, player_2)
+    Game.create(player_1, player_2)
     redirect to('/play')
   end
 
   get '/play' do
-    @game = $game
+    @game = Game.instance
     erb(:play)
   end
 
   get '/winner' do 
-    $game.winner.name + " wins!"
+    Game.instance.winner.name + " wins!"
   end
 
   post '/attack' do
-    $game.attack($game.non_active_player)
-    if $game.winner
+    Game.instance.attack(Game.instance.non_active_player)
+    if Game.instance.winner
       redirect to('winner')
     end
 
