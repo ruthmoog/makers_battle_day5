@@ -8,5 +8,4 @@
   <input type="submit" value="attack" />
 </form>
 
-<% if @victim %><%= @game.non_active_player.name %> attacked <%= @game.active_player.name %><% end %>
-
+<%= @game.last_victim_msg %>

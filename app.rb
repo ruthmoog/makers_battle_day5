@@ -18,13 +18,11 @@ class Battle < Sinatra::Base
 
   get '/play' do
     @game = $game
-    @victim = session[:victim]
     erb(:play)
   end
 
   post '/attack' do
     $game.attack($game.non_active_player)
-    session[:victim] = $game.non_active_player.name
     redirect to('play')
   end
 
