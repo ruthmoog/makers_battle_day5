@@ -1,12 +1,13 @@
 class Game
 
-  attr_reader :active_player, :non_active_player, :last_victim_msg
+  attr_reader :active_player, :non_active_player, :last_victim_msg, :winner
 
   def initialize(player_1, player_2)
     @players = [player_1, player_2]
     @active_player = player_1
     @non_active_player = player_2
     @last_victim_msg = ""
+    @winner = nil
   end
   
   def player_1
@@ -19,6 +20,11 @@ class Game
 
   def attack(player)
     player.damage
+
+    # set the winner field when appropiate
+    if player.hp == 0 
+      @winner = @active_player
+    end
 
     @last_victim_msg = "#{@active_player.name} attacked #{@non_active_player.name}"
     

@@ -5,6 +5,14 @@ RSpec.describe Game do
   let(:player_1) { double :player_1 }
   let(:player_2) { double :player_2 }
 
+  before(:each) do 
+    allow(player_2).to receive(:hp)
+    allow(player_2).to receive(:damage)
+    allow(player_1).to receive(:hp)
+    allow(player_1).to receive(:name)
+    allow(player_2).to receive(:name)
+  end
+
   describe "#player_1" do
     it "retrieves the first player" do
       expect(game.player_1).to eq(player_1)
@@ -20,6 +28,7 @@ RSpec.describe Game do
   describe "#attack" do
 
     it "damages the player" do
+      allow(player_2).to receive(:hp)
       allow(player_2).to receive(:name) { "Apollo" }
       allow(player_1).to receive(:name) {"Pepper" }
 
@@ -27,6 +36,14 @@ RSpec.describe Game do
       game.attack(player_2)
     end
 
+  end
+
+  describe "#winner" do 
+    it "puts the winner" do 
+      allow(player_2).to receive(:hp) {0}
+      game.attack(player_2)
+      expect(game.winner).to eq(player_1)
+    end
   end
 
   describe "#active_player" do
@@ -56,5 +73,6 @@ RSpec.describe Game do
 
       expect(game.active_player).to eq(player_1)
     end
+    
   end
 end

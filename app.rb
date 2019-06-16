@@ -21,8 +21,16 @@ class Battle < Sinatra::Base
     erb(:play)
   end
 
+  get '/winner' do 
+    $game.winner.name + " wins!"
+  end
+
   post '/attack' do
     $game.attack($game.non_active_player)
+    if $game.winner
+      redirect to('winner')
+    end
+
     redirect to('play')
   end
 
