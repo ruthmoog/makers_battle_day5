@@ -1,8 +1,8 @@
-<p><%= @player_1 %> Vs <%= @player_2 %></p>
-<p><%= @player_2 %>: 60 hit points<p>
+<p><%= @game.player_1.name %> Vs <%= @game.player_2.name %></p>
+<p><%= @game.player_2.name %>: <%= @game.player_2.hp %> hit points<p>
 
 <form action="/attack" method="post">
   <input type="submit" value="attack" />
 </form>
 
-<p>You attacked <%= @victim %></p>
+<% if @victim %><%= @game.player_1.name %> attacked <%= @game.player_2.name %><% end %>
